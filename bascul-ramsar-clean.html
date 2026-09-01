@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>باسکول | تعاونی باغداران مرکبات رامسر</title>
+<style>
+:root{
+  --bg:#eef5f0;--card:#fff;--primary:#1b7a4b;--primary-2:#14633d;--accent:#e7f6ee;
+  --border:#d5e5db;--text:#1f2d26;--muted:#6b7c73;--danger:#b42318;--warn:#b54708;
+  --radius:12px;--shadow:0 6px 18px rgba(27,122,75,.07);
+}
+[data-theme="blue"]{--bg:#eef2f8;--primary:#1a5f9e;--primary-2:#134a7c;--accent:#e3eef9;--border:#c9d8ea}
+[data-theme="dark"]{--bg:#1a2220;--card:#24302c;--primary:#2ecc71;--primary-2:#27ae60;--accent:#1e3a32;--border:#2f403a;--text:#e8f0ec;--muted:#9bb0a6}
+[data-theme="orange"]{--bg:#fdf6ef;--primary:#c45c12;--primary-2:#a34a0e;--accent:#fdeee0;--border:#edd9c4}
+*{box-sizing:border-box}
+html{font-size:clamp(12px,1.05vw,15px)}
+body{margin:0;font-family:Calibri,Tahoma,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;overflow-x:hidden}
+.app{max-width:min(1400px,100vw);margin:0 auto;padding:clamp(6px,1vw,12px)}
+.topbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;box-shadow:var(--shadow);margin-bottom:10px}
+.brand{display:flex;align-items:center;gap:10px}
+.brand h1{margin:0;font-size:clamp(14px,1.3vw,17px);color:var(--primary);font-weight:700}
+.brand p{margin:2px 0 0;color:var(--muted);font-size:11px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab-btn{border:0;border-radius:8px;padding:9px 14px;cursor:pointer;background:var(--accent);color:var(--primary-2);font-size:clamp(11px,1vw,13px);font-weight:700;transition:.12s}
+.tab-btn:hover{filter:brightness(.95)}
+.tab-btn.active{background:var(--primary);color:#fff}
+.main-grid{display:grid;grid-template-columns:1fr 300px;gap:10px}
+@media(max-width:960px){.main-grid{grid-template-columns:1fr}}
+.card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px}
+.card h2{margin:0 0 8px;font-size:15px;color:var(--primary-2)}
+.section{display:none}.section.active{display:block}
+.form-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.form-grid .full{grid-column:1/-1}
+.form-grid .half{grid-column:span 2}
+@media(max-width:800px){.form-grid{grid-template-columns:1fr 1fr}.form-grid .half{grid-column:1/-1}}
+label{display:block;margin-bottom:3px;font-size:11px;color:var(--muted);font-weight:600}
+input,select,textarea{width:100%;border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:14px;background:#fff;color:var(--text);font-family:inherit}
+[data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea{background:#1a2420;color:#e8f0ec;border-color:#3a4a44}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 2px rgba(27,122,75,.15)}
+input[readonly]{background:#f0f5f2;color:#2d4a3a;cursor:default}
+[data-theme="dark"] input[readonly]{background:#1e2a26}
+input.num-lg{font-size:18px;font-weight:700;text-align:center}
+.actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
+.btn{border:0;border-radius:8px;padding:9px 12px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;transition:.12s}
+.btn:hover{filter:brightness(.92)}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-secondary{background:var(--accent);color:var(--primary-2)}
+.btn-sm{padding:5px 8px;font-size:11px}
+.notice{background:rgba(0,0,0,.03);border:1px dashed var(--border);border-radius:8px;padding:8px 10px;font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.5}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#123d2a;color:#fff;padding:10px 16px;border-radius:8px;font-size:12px;z-index:9999;display:none;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+.login-overlay,.preview-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:10000;display:none;align-items:center;justify-content:center;padding:12px}
+.login-box,.preview-box{background:var(--card);border-radius:14px;padding:20px;width:min(440px,96vw);box-shadow:0 16px 40px rgba(0,0,0,.25);max-height:90vh;overflow:auto}
+.login-box h3{margin:0 0 12px;color:var(--primary);text-align:center}
+.weight-box{background:linear-gradient(145deg,#0f2f22,#1b7a4b);color:#fff;border-radius:14px;padding:16px 12px;text-align:center;margin-bottom:8px}
+[data-theme="blue"] .weight-box{background:linear-gradient(145deg,#0d2a4a,#1a5f9e)}
+[data-theme="dark"] .weight-box{background:linear-gradient(145deg,#0a1a14,#1e3a2e)}
+[data-theme="orange"] .weight-box{background:linear-gradient(145deg,#4a2508,#c45c12)}
+.weight-box .live{font-size:48px;font-weight:800;margin:8px 0 2px;font-variant-numeric:tabular-nums}
+.weight-box .meta{font-size:11px;opacity:.9}
+.stat-cards{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}
+.stat-card{border-radius:12px;padding:12px;text-align:center;color:#fff}
+.stat-card .val{font-size:20px;font-weight:800;margin:4px 0}
+.stat-card .lbl{font-size:11px;opacity:.9}
+.stat-count{background:linear-gradient(135deg,#1b7a4b,#2ecc71)}
+.stat-gross{background:linear-gradient(135deg,#1a5f9e,#3498db)}
+.stat-net{background:linear-gradient(135deg,#c45c12,#e67e22)}
+table{width:100%;border-collapse:collapse;font-size:11px;margin-top:8px}
+th,td{border:1px solid var(--border);padding:6px 5px;text-align:right}
+th{background:var(--accent);color:var(--muted);font-weight:600}
+tbody tr:nth-child(even){background:rgba(0,0,0,.02)}
+.badge{display:inline-block;padding:2px 7px;border-radius:999px;font-size:10px;font-weight:600;background:var(--accent);color:var(--primary-2)}
+.badge.complete{background:#e7f6ee;color:var(--primary)}
+.badge.incomplete{background:#fff1e5;color:var(--warn)}
+.help-box{font-size:12px;line-height:1.7}
+.help-box h4{margin:12px 0 4px;color:var(--primary-2);font-weight:700}
+.help-box p{margin:4px 0}
+</style>
+</head>
+<body>
+<div class="app">
+  <div class="topbar">
+    <div class="brand">
+      <div>
+        <h1 id="companyName1">شرکت تعاونی کشاورزی باغداران مرکبات رامسر</h1>
+        <p id="companyName2">نرم‌افزار مدیریت باسکول | نسخه آفلاین</p>
+      </div>
+    </div>
+    <div class="tabs" id="tabs">
+      <button type="button" class="tab-btn active" data-tab="dashboard"><span>📊</span> داشبورد</button>
+      <button type="button" class="tab-btn" data-tab="purchase"><span>🍊</span> خرید</button>
+      <button type="button" class="tab-btn" data-tab="normal"><span>⚖️</span> معمولی</button>
+      <button type="button" class="tab-btn" data-tab="reports"><span>📋</span> گزارش‌ها</button>
+      <button type="button" class="tab-btn" data-tab="definitions"><span>📚</span> تعاریف</button>
+      <button type="button" class="tab-btn" data-tab="settings"><span>⚙️</span> تنظیمات</button>
+      <button type="button" class="tab-btn" data-tab="help"><span>❓</span> راهنما</button>
+      <button type="button" class="tab-btn" id="btnLogout" style="background:#fdecec;color:#b42318"><span>🚪</span> خروج</button>
+    </div>
+  </div>
+
+  <div class="main-grid">
+    <div>
+      <!-- داشبورد -->
+      <section id="dashboard" class="section active card">
+        <h2>داشبورد باسکول</h2>
+        <div style="text-align:center;max-width:520px;margin:0 auto">
+          <div style="font-size:48px;font-weight:800;color:var(--primary);margin:20px 0">
+            <span id="dashCount">0</span>
+          </div>
+          <div style="color:var(--muted);margin-bottom:20px">تعداد کل قبض‌ها</div>
+          <div class="actions" style="justify-content:center;gap:12px">
+            <button type="button" class="btn btn-primary" id="btnDashToPurchase">ثبت خرید جدید</button>
+            <button type="button" class="btn btn-secondary" id="btnDashRefresh">بروزرسانی</button>
+          </div>
+          <div class="notice" style="margin-top:14px" id="dashSummary">هنوز قبضی ثبت نشده است</div>
+        </div>
+      </section>
+
+      <!-- خرید مرکبات -->
+      <section id="purchase" class="section card">
+        <h2>توزین خرید مرکبات</h2>
+        <div class="notice">مرحله ۱: وزن اول را بگیرید | مرحله ۲: وزن دوم را بگیرید</div>
+        <div class="form-grid">
+          <div class="half"><label>پلاک خودرو (۷ رقم)</label><input type="text" id="p_plate" placeholder="72 464 25" /></div>
+          <div><label>تاریخ و ساعت</label><input type="text" id="p_datetime" readonly /></div>
+          <div><label>شماره قبض</label><input type="text" id="p_receiptNo" readonly /></div>
+          <div><label>کالای خریداری</label><select id="p_product"><option value="">انتخاب کنید</option></select></div>
+          <div><label>گروه مشتریان</label><select id="p_group"><option value="">انتخاب کنید</option></select></div>
+          <div><label>راننده</label><input type="text" id="p_driver" /></div>
+          <div><label>طرف حساب</label><input type="text" id="p_party" /></div>
+          <div><label>موبایل طرف حساب</label><input type="text" id="p_partyMobile" placeholder="9123456789" /></div>
+          <div><label>وزن اول (کیلوگرم)</label><input type="number" id="p_w1" class="num-lg" readonly /></div>
+          <div><label>وزن دوم (کیلوگرم)</label><input type="number" id="p_w2" class="num-lg" readonly /></div>
+          <div><label>وزن ناخالص</label><input type="number" id="p_gross" class="num-lg" readonly /></div>
+          <div><label>درصد افت %</label><input type="number" id="p_wastePercent" min="0" max="100" step="1" value="" /></div>
+          <div><label>وزن افت</label><input type="number" id="p_wasteWeight" class="num-lg" readonly /></div>
+          <div><label>وزن خالص نهایی</label><input type="number" id="p_net" class="num-lg" readonly /></div>
+          <div class="full"><label>توضیحات</label><textarea id="p_note" rows="2"></textarea></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="btnCapturePurchase">⚖️ گرفتن وزن (F5)</button>
+          <button type="button" class="btn btn-secondary" id="btnSavePurchase">💾 ذخیره (F6)</button>
+          <button type="button" class="btn btn-secondary" id="btnResetPurchase">🧹 پاک‌سازی (F8)</button>
+        </div>
+        <input type="hidden" id="p_editId" />
+      </section>
+
+      <!-- معمولی -->
+      <section id="normal" class="section card">
+        <h2>توزین معمولی</h2>
+        <div class="form-grid">
+          <div class="half"><label>پلاک خودرو (۷ رقم)</label><input type="text" id="n_plate" placeholder="72 464 25" /></div>
+          <div><label>تاریخ و ساعت</label><input type="text" id="n_datetime" readonly /></div>
+          <div><label>شماره قبض</label><input type="text" id="n_receiptNo" readonly /></div>
+          <div><label>طرف حساب</label><input type="text" id="n_party" /></div>
+          <div><label>راننده</label><input type="text" id="n_driver" /></div>
+          <div><label>کالا</label><input type="text" id="n_product" /></div>
+          <div><label>وزن اول</label><input type="number" id="n_w1" class="num-lg" readonly /></div>
+          <div><label>وزن دوم</label><input type="number" id="n_w2" class="num-lg" readonly /></div>
+          <div><label>وزن ناخالص</label><input type="number" id="n_gross" class="num-lg" readonly /></div>
+          <div><label>وزن ظروف بسته‌بندی</label><input type="number" id="n_pack" min="0" step="1" value="" /></div>
+          <div><label>وزن خالص</label><input type="number" id="n_net" class="num-lg" readonly /></div>
+          <div class="full"><label>توضیحات</label><textarea id="n_note" rows="2"></textarea></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="btnCaptureNormal">⚖️ گرفتن وزن (F5)</button>
+          <button type="button" class="btn btn-secondary" id="btnSaveNormal">💾 ذخیره (F6)</button>
+          <button type="button" class="btn btn-secondary" id="btnResetNormal">🧹 پاک‌سازی (F8)</button>
+        </div>
+        <input type="hidden" id="n_editId" />
+      </section>
+
+      <!-- گزارش‌ها -->
+      <section id="reports" class="section card">
+        <h2>📋 گزارش‌ها</h2>
+        <div class="actions">
+          <button type="button" class="btn btn-secondary" id="btnExcel">📊 دانلود Excel</button>
+          <button type="button" class="btn btn-secondary" id="btnClearAll">🧹 حذف همه</button>
+        </div>
+        <table>
+          <thead>
+            <tr><th>قبض</th><th>نوع</th><th>تاریخ</th><th>پلاک</th><th>طرف‌حساب</th><th>خالص</th><th>وضعیت</th><th>عملیات</th></tr>
+          </thead>
+          <tbody id="recordsBody">
+            <tr><td colspan="8" style="text-align:center;padding:20px">هنوز قبضی ثبت نشده است</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <!-- تعاریف -->
+      <section id="definitions" class="section card">
+        <h2>تعاریف پایه</h2>
+        <div class="notice">با تایپ آزاد در فرم‌های خرید و معمولی، تعاریف جدید خودکار ذخیره می‌شود</div>
+        <div class="form-grid" style="grid-template-columns:1fr 1fr">
+          <div>
+            <h3 style="font-size:13px;margin:0 0 8px">گروه‌های مشتریان</h3>
+            <table>
+              <thead><tr><th>نام گروه</th></tr></thead>
+              <tbody id="groupsBody"><tr><td style="text-align:center">—</td></tr></tbody>
+            </table>
+          </div>
+          <div>
+            <h3 style="font-size:13px;margin:0 0 8px">رانندگان</h3>
+            <table>
+              <thead><tr><th>نام راننده</th></tr></thead>
+              <tbody id="driversBody"><tr><td style="text-align:center">—</td></tr></tbody>
+            </table>
+          </div>
+          <div>
+            <h3 style="font-size:13px;margin:0 0 8px">طرف‌حساب‌ها</h3>
+            <table>
+              <thead><tr><th>نام طرف‌حساب</th></tr></thead>
+              <tbody id="partiesBody"><tr><td style="text-align:center">—</td></tr></tbody>
+            </table>
+          </div>
+          <div>
+            <h3 style="font-size:13px;margin:0 0 8px">کالاها</h3>
+            <table>
+              <thead><tr><th>نام کالا</th></tr></thead>
+              <tbody id="productsBody"><tr><td style="text-align:center">—</td></tr></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+
+      <!-- تنظیمات -->
+      <section id="settings" class="section card">
+        <h2>⚙️ تنظیمات برنامه</h2>
+        <div class="form-grid">
+          <div><label>نام شرکت</label><input type="text" id="set_name1" value="شرکت تعاونی کشاورزی باغداران مرکبات رامسر" /></div>
+          <div><label>زیرعنوان</label><input type="text" id="set_name2" value="نرم‌افزار مدیریت باسکول | نسخه آفلاین" /></div>
+          <div><label>تلفن شرکت</label><input type="text" id="set_phone" /></div>
+          <div><label>آدرس شرکت</label><input type="text" id="set_address" /></div>
+          <div><label>تم رنگی</label><select id="set_theme"><option value="green">سبز</option><option value="blue">آبی</option><option value="orange">نارنجی</option><option value="dark">تیره</option></select></div>
+          <div><label>رمز مدیر</label><input type="password" id="set_pass" value="2468" /></div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-primary" id="btnSaveSettings">ذخیره تنظیمات</button>
+          <button type="button" class="btn btn-secondary" id="btnBackup">💾 پشتیبان</button>
+          <button type="button" class="btn btn-secondary" id="btnRestore">📂 بازیابی</button>
+        </div>
+        <input type="file" id="restoreFile" style="display:none" accept=".json" />
+      </section>
+
+      <!-- راهنما -->
+      <section id="help" class="section card">
+        <h2>❓ راهنمای استفاده</h2>
+        <div class="help-box">
+          <h4>🍊 خرید مرکبات</h4>
+          <p>۱. وارد تب <b>خرید</b> شوید</p>
+          <p>۲. اطلاعات خودرو، راننده و طرف‌حساب را وارد کنید</p>
+          <p>۳. دکمه <b>F5</b> یا دکمه <b>گرفتن وزن</b> را بزنید</p>
+          <p>۴. وزن اول خودکار ثبت می‌شود</p>
+          <p>۵. پس از تخلیه/پر کردن خودرو، دوباره F5 را بزنید</p>
+          <p>۶. درصد افت را وارد کنید</p>
+          <p>۷. دکمه <b>F6</b> یا <b>ذخیره</b> را بزنید</p>
+
+          <h4>⚖️ توزین معمولی</h4>
+          <p>۱. وارد تب <b>معمولی</b> شوید</p>
+          <p>۲. اطلاعات خودرو را وارد کنید</p>
+          <p>۳. وزن‌های اول و دوم را با F5 بگیرید</p>
+          <p>۴. وزن ظروف (درصورت وجود) را وارد کنید</p>
+          <p>۵. ذخیره کنید</p>
+
+          <h4>📋 گزارش‌ها</h4>
+          <p>تمام قبض‌های ثبت‌شده در این تب نمایش داده می‌شود</p>
+          <p>می‌توانید با دکمه <b>Excel</b> خروجی دریافت کنید</p>
+
+          <h4>⌨️ میانبرهای صفحه‌کلید</h4>
+          <p><b>F5</b>: گرفتن وزن</p>
+          <p><b>F6</b>: ذخیره قبض</p>
+          <p><b>F8</b>: پاک‌سازی فرم</p>
+
+          <h4>💾 پشتیبان‌گیری</h4>
+          <p>در تنظیمات دکمه <b>پشتیبان</b> را بزنید</p>
+          <p>یک فایل JSON دانلود می‌شود</p>
+          <p>برای بازیابی، دکمه <b>بازیابی</b> را بزنید و فایل انتخاب کنید</p>
+        </div>
+      </section>
+    </div>
+
+    <div>
+      <div class="card">
+        <div class="weight-box">
+          <div style="font-size:14px">وزن زنده</div>
+          <div class="live" id="liveWeight">0</div>
+          <div class="meta">کیلوگرم</div>
+        </div>
+        <div class="actions">
+          <button type="button" class="btn btn-secondary btn-sm" id="btnManualWeight">⌨️ ورود دستی</button>
+        </div>
+        <h3 style="margin:12px 0 4px;font-size:13px;color:var(--primary-2)">آمار امروز</h3>
+        <div id="sideDashDate" style="text-align:center;font-size:12px;margin-bottom:8px;color:var(--muted)">—</div>
+        <div class="stat-cards">
+          <div class="stat-card stat-count">
+            <div class="lbl">تعداد قبض</div>
+            <div class="val" id="sideDashCount">0</div>
+          </div>
+          <div class="stat-card stat-gross">
+            <div class="lbl">وزن ناخالص (kg)</div>
+            <div class="val" id="sideDashGross">0</div>
+          </div>
+          <div class="stat-card stat-net">
+            <div class="lbl">وزن خالص (kg)</div>
+            <div class="val" id="sideDashNet">0</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="login-overlay" id="loginOverlay">
+  <div class="login-box">
+    <h3>🔐 ورود به سامانه</h3>
+    <label>رمز مدیر</label>
+    <input type="password" id="loginPass" />
+    <div class="actions" style="margin-top:12px;justify-content:center">
+      <button type="button" class="btn btn-primary" id="btnLogin">ورود</button>
+    </div>
+    <div class="notice" style="margin-top:10px;text-align:center">رمز پیش‌فرض: <b>2468</b></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+'use strict';
+
+// متغیرهای سراسری
+const DB_KEY = 'bascul_ramsar_db_v1';
+let db = { records: [], groups: [], drivers: [], parties: [], products: [], settings: { name1: 'شرکت تعاونی کشاورزی باغداران مرکبات رامسر', name2: 'نرم‌افزار مدیریت باسکول | نسخه آفلاین', phone: '', address: '', theme: 'green', pass: '2468' } };
+let liveWeight = 0;
+let currentUser = null;
+
+// توابع کمکی
+const $ = id => document.getElementById(id);
+const toast = msg => { const t = $('toast'); t.textContent = msg; t.style.display = 'block'; setTimeout(() => t.style.display = 'none', 2500); };
+const toEnglishDigits = str => String(str || '').replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+const roundInt = v => Math.round(Number(toEnglishDigits(v)) || 0);
+const nowDate = () => { const d = new Date(); const fmt = new Intl.DateTimeFormat('fa-IR', { year: 'numeric', month: '2-digit', day: '2-digit' }); return fmt.format(d).replace(/\u06F0/g, '0').replace(/\u06F1/g, '1').replace(/\u06F2/g, '2').replace(/\u06F3/g, '3').replace(/\u06F4/g, '4').replace(/\u06F5/g, '5').replace(/\u06F6/g, '6').replace(/\u06F7/g, '7').replace(/\u06F8/g, '8').replace(/\u06F9/g, '9'); };
+const nowTime = () => { const d = new Date(); return String(d.getHours()).padStart(2, '0') + ':' + String(d.getMinutes()).padStart(2, '0'); };
+
+// بارگذاری و ذخیره‌سازی
+function loadDB() { try { const saved = localStorage.getItem(DB_KEY); if (saved) db = JSON.parse(saved); } catch (e) {} }
+function saveDB() { try { localStorage.setItem(DB_KEY, JSON.stringify(db)); } catch (e) { toast('خطا در ذخیره‌سازی'); } }
+
+// شماره قبض
+function getNextReceipt() { return String(db.records.length + 1).padStart(5, '0'); }
+
+// محاسبات خرید
+function calcPurchase() {
+  const w1 = roundInt($('p_w1').value), w2 = roundInt($('p_w2').value), wp = roundInt($('p_wastePercent').value);
+  const gross = w1 > 0 && w2 > 0 ? Math.abs(w1 - w2) : 0;
+  const waste = gross > 0 ? Math.round(gross * wp / 100) : 0;
+  const net = Math.max(0, gross - waste);
+  $('p_gross').value = gross || '';
+  $('p_wasteWeight').value = waste || '';
+  $('p_net').value = net || '';
+}
+
+// محاسبات معمولی
+function calcNormal() {
+  const w1 = roundInt($('n_w1').value), w2 = roundInt($('n_w2').value), pack = roundInt($('n_pack').value);
+  const gross = w1 > 0 && w2 > 0 ? Math.abs(w1 - w2) : 0;
+  const net = Math.max(0, gross - pack);
+  $('n_gross').value = gross || '';
+  $('n_net').value = net || '';
+}
+
+// گرفتن وزن
+function captureWeight(type) {
+  if (liveWeight <= 0) { alert('وزن معتبر نیست'); return; }
+  if (type === 'purchase') {
+    const w1 = roundInt($('p_w1').value);
+    if (!w1) $('p_w1').value = liveWeight; else $('p_w2').value = liveWeight;
+    calcPurchase();
+  } else {
+    const w1 = roundInt($('n_w1').value);
+    if (!w1) $('n_w1').value = liveWeight; else $('n_w2').value = liveWeight;
+    calcNormal();
+  }
+  toast(`✅ وزن: ${liveWeight} kg`);
+}
+
+// ذخیره قبض
+function saveRecord(type) {
+  if (type === 'purchase') {
+    const w1 = roundInt($('p_w1').value);
+    if (!w1) { alert('حداقل وزن اول لازم است'); return; }
+    const rec = {
+      id: 'R' + Date.now(), type: 'purchase', receipt: getNextReceipt(), date: nowDate(), datetime: nowDate() + ' ' + nowTime(),
+      plate: $('p_plate').value || '', product: $('p_product').value || '', group: $('p_group').value || '',
+      driver: $('p_driver').value || '', party: $('p_party').value || '', partyMobile: $('p_partyMobile').value || '',
+      w1, w2: roundInt($('p_w2').value),
+      gross: roundInt($('p_gross').value), wastePercent: roundInt($('p_wastePercent').value),
+      wasteWeight: roundInt($('p_wasteWeight').value), net: roundInt($('p_net').value),
+      note: $('p_note').value || '', status: roundInt($('p_w2').value) > 0 ? 'complete' : 'incomplete'
+    };
+    db.records.push(rec);
+    if ($('p_product').value && !db.products.includes($('p_product').value)) db.products.push($('p_product').value);
+    if ($('p_group').value && !db.groups.includes($('p_group').value)) db.groups.push($('p_group').value);
+    if ($('p_driver').value && !db.drivers.includes($('p_driver').value)) db.drivers.push($('p_driver').value);
+    if ($('p_party').value && !db.parties.includes($('p_party').value)) db.parties.push($('p_party').value);
+    saveDB(); resetPurchase(); renderRecords(); updateDashboard();
+    toast('✅ قبض ذخیره شد');
+  } else {
+    const w1 = roundInt($('n_w1').value);
+    if (!w1) { alert('حداقل وزن اول لازم است'); return; }
+    const rec = {
+      id: 'R' + Date.now(), type: 'normal', receipt: getNextReceipt(), date: nowDate(), datetime: nowDate() + ' ' + nowTime(),
+      plate: $('n_plate').value || '', product: $('n_product').value || '',
+      driver: $('n_driver').value || '', party: $('n_party').value || '',
+      w1, w2: roundInt($('n_w2').value),
+      gross: roundInt($('n_gross').value), net: roundInt($('n_net').value),
+      note: $('n_note').value || '', status: roundInt($('n_w2').value) > 0 ? 'complete' : 'incomplete'
+    };
+    db.records.push(rec);
+    if ($('n_product').value && !db.products.includes($('n_product').value)) db.products.push($('n_product').value);
+    if ($('n_driver').value && !db.drivers.includes($('n_driver').value)) db.drivers.push($('n_driver').value);
+    if ($('n_party').value && !db.parties.includes($('n_party').value)) db.parties.push($('n_party').value);
+    saveDB(); resetNormal(); renderRecords(); updateDashboard();
+    toast('✅ قبض ذخیره شد');
+  }
+}
+
+// بازنشانی فرم‌ها
+function resetPurchase() {
+  $('p_plate').value = '';
+  $('p_datetime').value = nowDate() + ' ' + nowTime();
+  $('p_receiptNo').value = getNextReceipt();
+  $('p_product').value = '';
+  $('p_group').value = '';
+  $('p_driver').value = '';
+  $('p_party').value = '';
+  $('p_partyMobile').value = '';
+  $('p_w1').value = '';
+  $('p_w2').value = '';
+  $('p_gross').value = '';
+  $('p_wastePercent').value = '';
+  $('p_wasteWeight').value = '';
+  $('p_net').value = '';
+  $('p_note').value = '';
+}
+
+function resetNormal() {
+  $('n_plate').value = '';
+  $('n_datetime').value = nowDate() + ' ' + nowTime();
+  $('n_receiptNo').value = getNextReceipt();
+  $('n_party').value = '';
+  $('n_driver').value = '';
+  $('n_product').value = '';
+  $('n_w1').value = '';
+  $('n_w2').value = '';
+  $('n_gross').value = '';
+  $('n_pack').value = '';
+  $('n_net').value = '';
+  $('n_note').value = '';
+}
+
+// نمایش گزارش‌ها
+function renderRecords() {
+  const body = $('recordsBody');
+  if (!db.records.length) { body.innerHTML = '<tr><td colspan="8" style="text-align:center;padding:20px">هنوز قبضی ثبت نشده است</td></tr>'; return; }
+  body.innerHTML = db.records.map((r, i) => `<tr><td>${r.receipt}</td><td>${r.type === 'purchase' ? 'خرید' : 'معمولی'}</td><td>${r.date}</td><td>${r.plate}</td><td>${r.party || '—'}</td><td>${r.net || 0}</td><td><span class="badge ${r.status}">${r.status === 'complete' ? 'کامل' : 'ناقص'}</span></td><td><button class="btn btn-sm" style="background:#fdecec;color:#b42318" onclick="deleteRecord(${i})">حذف</button></td></tr>`).join('');
+}
+
+// حذف قبض
+function deleteRecord(index) {
+  if (confirm('حذف این قبض؟')) { db.records.splice(index, 1); saveDB(); renderRecords(); updateDashboard(); toast('✅ حذف شد'); }
+}
+
+// بروزرسانی داشبورد
+function updateDashboard() {
+  $('dashCount').textContent = db.records.length;
+  const today = nowDate();
+  const todayRecords = db.records.filter(r => r.date === today);
+  $('sideDashDate').textContent = `تاریخ: ${today}`;
+  $('sideDashCount').textContent = todayRecords.length;
+  const totalGross = todayRecords.reduce((s, r) => s + (r.gross || 0), 0);
+  const totalNet = todayRecords.reduce((s, r) => s + (r.net || 0), 0);
+  $('sideDashGross').textContent = totalGross;
+  $('sideDashNet').textContent = totalNet;
+  $('dashSummary').innerHTML = todayRecords.length ? `امروز <b>${today}</b> — تعداد: <b>${todayRecords.length}</b> | ناخالص: <b>${totalGross}</b> | خالص: <b>${totalNet}</b>` : 'هنوز قبضی ثبت نشده است';
+}
+
+// تغییر تب
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-tab') === tabId));
+  document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', s.id === tabId));
+  if (tabId === 'dashboard') updateDashboard();
+  if (tabId === 'reports') renderRecords();
+  if (tabId === 'purchase') { $('p_datetime').value = nowDate() + ' ' + nowTime(); $('p_receiptNo').value = getNextReceipt(); }
+  if (tabId === 'normal') { $('n_datetime').value = nowDate() + ' ' + nowTime(); $('n_receiptNo').value = getNextReceipt(); }
+}
+
+// تنظیمات
+function updateSettings() {
+  db.settings.name1 = $('set_name1').value;
+  db.settings.name2 = $('set_name2').value;
+  db.settings.phone = $('set_phone').value;
+  db.settings.address = $('set_address').value;
+  db.settings.theme = $('set_theme').value;
+  db.settings.pass = $('set_pass').value;
+  document.documentElement.setAttribute('data-theme', db.settings.theme);
+  $('companyName1').textContent = db.settings.name1;
+  $('companyName2').textContent = db.settings.name2;
+  saveDB();
+  toast('✅ تنظیمات ذخیره شد');
+}
+
+// خروجی Excel
+function exportExcel() {
+  if (!db.records.length) { alert('هنوز قبضی ثبت نشده است'); return; }
+  let csv = 'شماره قبض,نوع,تاریخ,پلاک,راننده,طرف‌حساب,کالا,وزن اول,وزن دوم,ناخالص,درصد افت,وزن افت,خالص,وضعیت\n';
+  db.records.forEach(r => {
+    csv += `"${r.receipt}","${r.type}","${r.date}","${r.plate}","${r.driver}","${r.party}","${r.product || r.group}",${r.w1 || 0},${r.w2 || 0},${r.gross || 0},${r.wastePercent || 0},${r.wasteWeight || 0},${r.net || 0},"${r.status}"\n`;
+  });
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent('\ufeff' + csv);
+  a.download = 'bascul-' + nowDate() + '.csv';
+  a.click();
+  toast('📊 دانلود شد');
+}
+
+// رویدادها
+function bindEvents() {
+  // تبدیل تب‌ها
+  $('tabs').addEventListener('click', e => {
+    const btn = e.target.closest('.tab-btn');
+    if (!btn) return;
+    if (btn.id === 'btnLogout') { currentUser = null; location.reload(); return; }
+    switchTab(btn.getAttribute('data-tab'));
+  });
+
+  // خرید
+  $('btnCapturePurchase').onclick = () => captureWeight('purchase');
+  $('btnSavePurchase').onclick = () => saveRecord('purchase');
+  $('btnResetPurchase').onclick = resetPurchase;
+  $('p_wastePercent').oninput = calcPurchase;
+
+  // معمولی
+  $('btnCaptureNormal').onclick = () => captureWeight('normal');
+  $('btnSaveNormal').onclick = () => saveRecord('normal');
+  $('btnResetNormal').onclick = resetNormal;
+  $('n_pack').oninput = calcNormal;
+
+  // گزارش‌ها
+  $('btnExcel').onclick = exportExcel;
+  $('btnClearAll').onclick = () => {
+    if (confirm('حذف تمام قبض‌ها؟')) { db.records = []; saveDB(); renderRecords(); updateDashboard(); toast('✅ حذف شد'); }
+  };
+
+  // داشبورد
+  $('btnDashToPurchase').onclick = () => switchTab('purchase');
+  $('btnDashRefresh').onclick = updateDashboard;
+
+  // تنظیمات
+  $('btnSaveSettings').onclick = updateSettings;
+  $('btnBackup').onclick = () => {
+    const json = JSON.stringify(db, null, 2);
+    const a = document.createElement('a');
+    a.href = 'data:text/json,' + encodeURIComponent(json);
+    a.download = 'bascul-backup-' + nowDate() + '.json';
+    a.click();
+    toast('💾 پشتیبان دانلود شد');
+  };
+  $('btnRestore').onclick = () => $('restoreFile').click();
+  $('restoreFile').onchange = e => {
+    const f = e.target.files[0]; if (!f) return;
+    const reader = new FileReader();
+    reader.onload = () => {
+      try { db = JSON.parse(reader.result); saveDB(); renderRecords(); updateDashboard(); toast('✅ بازیابی شد'); }
+      catch (err) { alert('فایل نامعتبر است'); }
+    };
+    reader.readAsText(f);
+  };
+
+  // ورود دستی وزن
+  $('btnManualWeight').onclick = () => {
+    const v = prompt('وزن (کیلوگرم):');
+    if (v !== null) { liveWeight = roundInt(v); $('liveWeight').textContent = liveWeight; toast(`✅ وزن: ${liveWeight} kg`); }
+  };
+
+  // ورود
+  $('btnLogin').onclick = () => {
+    const pass = $('loginPass').value;
+    if (pass === db.settings.pass) { currentUser = { role: 'admin' }; $('loginOverlay').style.display = 'none'; toast('✅ ورود موفق'); switchTab('dashboard'); }
+    else alert('رمز نادرست است');
+  };
+  $('loginPass').onkeydown = e => { if (e.key === 'Enter') $('btnLogin').click(); };
+
+  // میانبرها
+  document.addEventListener('keydown', e => {
+    if (e.key === 'F5') { e.preventDefault(); if (document.querySelector('#purchase.active')) captureWeight('purchase'); else if (document.querySelector('#normal.active')) captureWeight('normal'); }
+    else if (e.key === 'F6') { e.preventDefault(); if (document.querySelector('#purchase.active')) saveRecord('purchase'); else if (document.querySelector('#normal.active')) saveRecord('normal'); }
+    else if (e.key === 'F8') { e.preventDefault(); if (document.querySelector('#purchase.active')) resetPurchase(); else if (document.querySelector('#normal.active')) resetNormal(); }
+  });
+}
+
+// شروع برنامه
+loadDB();
+document.documentElement.setAttribute('data-theme', db.settings.theme);
+$('companyName1').textContent = db.settings.name1;
+$('companyName2').textContent = db.settings.name2;
+bindEvents();
+resetPurchase();
+resetNormal();
+updateDashboard();
+
+// پر کردن dropdownها
+function updateDropdowns() {
+  $('p_product').innerHTML = '<option value="">انتخاب کنید</option>' + db.products.map(p => `<option value="${p}">${p}</option>`).join('');
+  $('p_group').innerHTML = '<option value="">انتخاب کنید</option>' + db.groups.map(g => `<option value="${g}">${g}</option>`).join('');
+}
+
+updateDropdowns();
+
+// وزن شبیه‌ساز
+setInterval(() => {
+  liveWeight = Math.floor(Math.random() * 15000 + 500);
+  $('liveWeight').textContent = liveWeight;
+}, 3000);
+
+// ورود اولیه
+if (!currentUser) { $('loginOverlay').style.display = 'flex'; }
+</script>
+</body>
+</html>
