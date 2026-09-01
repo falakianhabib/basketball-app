@@ -9,181 +9,80 @@
   --bg:#eef5f0;--card:#fff;--primary:#1b7a4b;--primary-2:#14633d;--accent:#e7f6ee;
   --border:#d5e5db;--text:#1f2d26;--muted:#6b7c73;--danger:#b42318;--warn:#b54708;
   --radius:12px;--shadow:0 6px 18px rgba(27,122,75,.07);
-  --mode-full-bg:#f0faf4;--mode-empty-bg:#fff8e8;
 }
-[data-theme="blue"]{--bg:#eef2f8;--primary:#1a5f9e;--primary-2:#134a7c;--accent:#e3eef9;--border:#c9d8ea;--mode-full-bg:#eef5fc;--mode-empty-bg:#fff6e8}
-[data-theme="dark"]{--bg:#1a2220;--card:#24302c;--primary:#2ecc71;--primary-2:#27ae60;--accent:#1e3a32;--border:#2f403a;--text:#e8f0ec;--muted:#9bb0a6;--mode-full-bg:#1c3329;--mode-empty-bg:#3a2e1a}
-[data-theme="orange"]{--bg:#fdf6ef;--primary:#c45c12;--primary-2:#a34a0e;--accent:#fdeee0;--border:#edd9c4;--mode-full-bg:#f0faf4;--mode-empty-bg:#fff3e0}
+[data-theme="blue"]{--bg:#eef2f8;--primary:#1a5f9e;--primary-2:#134a7c;--accent:#e3eef9;--border:#c9d8ea}
+[data-theme="dark"]{--bg:#1a2220;--card:#24302c;--primary:#2ecc71;--primary-2:#27ae60;--accent:#1e3a32;--border:#2f403a;--text:#e8f0ec;--muted:#9bb0a6}
+[data-theme="orange"]{--bg:#fdf6ef;--primary:#c45c12;--primary-2:#a34a0e;--accent:#fdeee0;--border:#edd9c4}
 *{box-sizing:border-box}
 html{font-size:clamp(12px,1.05vw,15px)}
-body{margin:0;font-family:Calibri,Tahoma,"Segoe UI",sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:1rem;overflow-x:hidden}
-.app{max-width:min(1400px,100vw);margin:0 auto;padding:clamp(6px,1vw,12px)}
+body{margin:0;font-family:Calibri,Tahoma,sans-serif;background:var(--bg);color:var(--text);min-height:100vh;font-size:1rem}
+.app{max-width:1400px;margin:0 auto;padding:12px}
 .topbar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:10px 12px;box-shadow:var(--shadow);margin-bottom:10px}
-.brand{display:flex;align-items:center;gap:10px}
-.brand img{height:42px;width:auto;border-radius:6px;object-fit:contain}
-.brand h1{margin:0;font-size:clamp(14px,1.3vw,17px);color:var(--primary);font-weight:700;font-family:Calibri,Tahoma,sans-serif}
-.brand p{margin:2px 0 0;color:var(--muted);font-size:11px;font-family:Calibri,Tahoma,sans-serif}
-.tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:flex-end}
-.tab-btn{border:0;border-radius:8px;padding:9px 14px;cursor:pointer;background:var(--accent);color:var(--primary-2);font-size:clamp(12px,1.1vw,14px);font-weight:700;transition:.12s;position:relative;font-family:Calibri,Tahoma,sans-serif;display:inline-flex;align-items:center;gap:5px}
-.tab-btn:hover:not(.active){filter:brightness(.95)}
+.brand h1{margin:0;font-size:18px;color:var(--primary);font-weight:700}
+.brand p{margin:0;color:var(--muted);font-size:11px}
+.tabs{display:flex;gap:6px;flex-wrap:wrap}
+.tab-btn{border:0;border-radius:8px;padding:9px 14px;cursor:pointer;background:var(--accent);color:var(--primary-2);font-size:12px;font-weight:700;transition:.12s}
+.tab-btn:hover{filter:brightness(.95)}
 .tab-btn.active{background:var(--primary);color:#fff}
-.tab-badge{display:inline-block;background:#e74c3c;color:#fff;font-size:10px;font-weight:700;border-radius:999px;padding:1px 6px;margin-right:4px;min-width:16px;text-align:center;vertical-align:middle}
-.tab-btn.active .tab-badge{background:#fff;color:#e74c3c}
-.tab-btn.locked{opacity:.55}
-.icol{margin-left:2px}
-.col-chips{display:flex;flex-wrap:wrap;gap:6px;align-items:center;margin-top:4px}
-.col-chip{display:inline-flex;align-items:center;gap:4px;background:var(--accent);border:1px solid var(--border);border-radius:999px;padding:5px 10px;font-size:11px;font-weight:600;cursor:pointer;user-select:none;transition:.12s}
-.col-chip:hover{filter:brightness(.96)}
-.col-chip input{margin:0;accent-color:var(--primary)}
-.col-chip.on{background:var(--primary);color:#fff;border-color:var(--primary-2)}
-.col-bar{display:flex;flex-wrap:wrap;gap:8px;align-items:center;justify-content:space-between;margin-top:8px;padding:8px;background:rgba(0,0,0,.02);border:1px dashed var(--border);border-radius:10px}
-.lock-overlay{display:none;position:absolute;inset:0;background:rgba(255,255,255,.85);z-index:5;align-items:center;justify-content:center;border-radius:var(--radius);text-align:center;padding:20px}
-[data-theme="dark"] .lock-overlay{background:rgba(20,30,26,.9)}
-#settings{position:relative}
-.main-grid{display:grid;grid-template-columns:1fr 300px;gap:10px}
+.main-grid{display:grid;grid-template-columns:1fr 280px;gap:10px}
 @media(max-width:960px){.main-grid{grid-template-columns:1fr}}
 .card{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);box-shadow:var(--shadow);padding:12px}
-.card h2{margin:0 0 8px;font-size:clamp(13px,1.2vw,15px);color:var(--primary-2);font-family:Calibri,Tahoma,sans-serif}
+.card h2{margin:0 0 8px;font-size:15px;color:var(--primary-2)}
 .section{display:none}.section.active{display:block}
-.mobile-wrap{display:flex;align-items:center;gap:4px;direction:ltr}
-.mobile-wrap .prefix{font-weight:700;font-size:14px;color:var(--primary);padding:0 4px;white-space:nowrap}
-.form-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px}
+.form-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:8px}
 .form-grid .full{grid-column:1/-1}
 .form-grid .half{grid-column:span 2}
 @media(max-width:800px){.form-grid{grid-template-columns:1fr 1fr}.form-grid .half{grid-column:1/-1}}
 label{display:block;margin-bottom:3px;font-size:11px;color:var(--muted);font-weight:600}
-input,select,textarea{width:100%;border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:14px;background:#fff;color:var(--text);font-family:inherit}
+input,select,textarea{width:100%;border:1px solid var(--border);border-radius:8px;padding:8px 10px;font-size:14px;background:#fff;color:var(--text)}
 [data-theme="dark"] input,[data-theme="dark"] select,[data-theme="dark"] textarea{background:#1a2420;color:#e8f0ec;border-color:#3a4a44}
-input:focus,select:focus,textarea:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 2px rgba(27,122,75,.15)}
-input[readonly],input:disabled{background:#f0f5f2;color:#2d4a3a;cursor:default}
-[data-theme="dark"] input[readonly]{background:#1e2a26}
-input.num-lg{font-size:18px;font-weight:700;text-align:center;letter-spacing:.5px}
-input.ltr-num{direction:ltr;text-align:left;unicode-bidi:bidi-override}
-.sheba-wrap{display:flex;align-items:center;gap:4px;direction:ltr}
-.sheba-wrap .ir{font-weight:700;font-size:15px;color:var(--primary);padding:0 4px}
-.sheba-wrap input{flex:1}
+input:focus,select:focus{outline:none;border-color:var(--primary);box-shadow:0 0 0 2px rgba(27,122,75,.15)}
+input[readonly]{background:#f0f5f2;cursor:default}
+input.num-lg{font-size:18px;font-weight:700;text-align:center}
 .actions{display:flex;flex-wrap:wrap;gap:6px;margin-top:10px}
-.btn{border:0;border-radius:8px;padding:9px 12px;cursor:pointer;font-size:12px;font-weight:600;font-family:inherit;transition:.12s}
-.btn:disabled{opacity:.45;cursor:not-allowed}
-.btn:active:not(:disabled){transform:scale(.97)}
+.btn{border:0;border-radius:8px;padding:9px 12px;cursor:pointer;font-size:12px;font-weight:600;transition:.12s}
+.btn:hover{filter:brightness(.92)}
 .btn-primary{background:var(--primary);color:#fff}
-.btn-primary:hover:not(:disabled){filter:brightness(.92)}
 .btn-secondary{background:var(--accent);color:var(--primary-2)}
-.btn-warn{background:#fff1e5;color:var(--warn)}
-.btn-danger{background:#fdecec;color:var(--danger)}
 .btn-sm{padding:5px 8px;font-size:11px}
-.mode-bar{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-bottom:8px}
-.mode-bar .btn{padding:14px;font-size:16px;font-weight:800;border:2px solid transparent}
-.mode-bar .btn.active-full{background:#1b7a4b;color:#fff;border-color:#0f5a36}
-.mode-bar .btn.active-empty{background:#e8a838;color:#4a2e00;border-color:#c48820}
-.mode-bar .btn.idle{background:#e7efe9;color:#35684f}
-.form-mode-full{background:var(--mode-full-bg)!important;border-color:#a8d5b8}
-.form-mode-empty{background:var(--mode-empty-bg)!important;border-color:#e8c878}
+.notice{background:rgba(0,0,0,.03);border:1px dashed var(--border);border-radius:8px;padding:8px 10px;font-size:11px;color:var(--muted);margin-bottom:8px}
+.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#123d2a;color:#fff;padding:10px 16px;border-radius:8px;font-size:12px;z-index:9999;display:none;box-shadow:0 6px 20px rgba(0,0,0,.2)}
+.login-overlay,.preview-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:10000;display:none;align-items:center;justify-content:center}
+.login-box,.preview-box{background:var(--card);border-radius:14px;padding:20px;width:min(440px,96vw);box-shadow:0 16px 40px rgba(0,0,0,.25)}
+.login-box h3{margin:0 0 12px;color:var(--primary);text-align:center}
 .weight-box{background:linear-gradient(145deg,#0f2f22,#1b7a4b);color:#fff;border-radius:14px;padding:16px 12px;text-align:center;margin-bottom:8px}
-[data-theme="blue"] .weight-box{background:linear-gradient(145deg,#0d2a4a,#1a5f9e)}
-[data-theme="dark"] .weight-box{background:linear-gradient(145deg,#0a1a14,#1e3a2e)}
-[data-theme="orange"] .weight-box{background:linear-gradient(145deg,#4a2508,#c45c12)}
-.weight-box .live{font-size:52px;font-weight:800;letter-spacing:1px;margin:8px 0 2px;font-variant-numeric:tabular-nums;line-height:1.1}
-.weight-box .meta{font-size:11px;opacity:.9}
-.status-pill{display:inline-block;padding:3px 10px;border-radius:999px;background:rgba(255,255,255,.18);font-size:11px;font-weight:600}
-.status-pill.connected{background:rgba(46,204,113,.3);color:#d4ffd4}
-.status-pill.disconnected{background:rgba(231,76,60,.25);color:#ffd0d0}
-.side-sticky{position:sticky;top:8px}
-.table-wrap{overflow:auto;max-height:380px;border:1px solid var(--border);border-radius:10px;position:relative}
-.table-wrap-daily{max-height:320px}
-table{width:100%;border-collapse:collapse;font-size:11px}
-th,td{border-bottom:1px solid var(--border);padding:6px 5px;text-align:right;white-space:nowrap}
-th{background:var(--accent);color:var(--muted);position:sticky;top:0;z-index:2;font-weight:600}
-tbody tr:nth-child(even){background:rgba(0,0,0,.02)}
-tbody tr:hover{background:rgba(27,122,75,.06)}
-tfoot td,
-td.total-cell,
-.total-row td{
-  font-weight:900!important;
-  font-size:14px!important;
-  letter-spacing:.2px;
-  background:linear-gradient(90deg,#0f5c38,#1b7a4b 40%,#2aa866)!important;
-  color:#fff!important;
-  border:none!important;
-  border-top:4px solid #083d24!important;
-  padding:12px 8px!important;
-  text-shadow:0 1px 0 rgba(0,0,0,.15);
-}
-tfoot{position:sticky;bottom:0;z-index:2;box-shadow:0 -4px 12px rgba(15,92,56,.25)}
-.total-row td:first-child{border-radius:0 10px 10px 0}
-.total-row td:last-child{border-radius:10px 0 0 10px}
-[data-theme="dark"] tfoot td,[data-theme="dark"] .total-row td{
-  background:linear-gradient(90deg,#083d24,#0f5c38 40%,#1b7a4b)!important;
-}
-.year-stats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin:12px 0}
-@media(max-width:900px){.year-stats{grid-template-columns:1fr 1fr}}
-.year-stat-card{border-radius:12px;padding:14px 10px;text-align:center;color:#fff;box-shadow:var(--shadow)}
-.year-stat-card .val{font-size:22px;font-weight:800;margin:4px 0;font-variant-numeric:tabular-nums}
-.year-stat-card .lbl{font-size:12px;opacity:.95;font-weight:600}
-.year-stat-card .sub{font-size:10px;opacity:.85;margin-top:2px}
-.ys-gross{background:linear-gradient(135deg,#1a5f9e,#3498db)}
-.ys-waste{background:linear-gradient(135deg,#c0392b,#e74c3c)}
-.ys-avg{background:linear-gradient(135deg,#8e44ad,#9b59b6)}
-.ys-net{background:linear-gradient(135deg,#1b7a4b,#27ae60)}
-.filters{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:8px;margin-bottom:8px}
-@media(max-width:900px){.filters{grid-template-columns:1fr 1fr}}
-.footer-note{margin-top:12px;text-align:center;color:var(--muted);font-size:11px}
-.badge{display:inline-block;padding:2px 7px;border-radius:999px;font-size:10px;font-weight:600;background:var(--accent);color:var(--primary-2)}
-.badge.incomplete{background:#fff1e5;color:var(--warn)}
-.badge.complete{background:#e7f6ee;color:var(--primary)}
-.notice{background:rgba(0,0,0,.03);border:1px dashed var(--border);border-radius:8px;padding:8px 10px;font-size:11px;color:var(--muted);margin-bottom:8px;line-height:1.5}
-.toast{position:fixed;bottom:16px;left:50%;transform:translateX(-50%);background:#123d2a;color:#fff;padding:10px 16px;border-radius:8px;font-size:12px;z-index:9999;display:none;box-shadow:0 6px 20px rgba(0,0,0,.2);max-width:90vw;text-align:center}
-.errbox{display:none;background:#fdecec;color:#b42318;border:1px solid #f3c1c1;padding:9px 12px;border-radius:8px;margin-bottom:8px;font-size:12px}
-.login-overlay,.preview-overlay{position:fixed;inset:0;background:rgba(0,0,0,.55);z-index:10000;display:none;align-items:center;justify-content:center;padding:12px}
-.login-box,.preview-box{background:var(--card);border-radius:14px;padding:20px;width:min(440px,96vw);box-shadow:0 16px 40px rgba(0,0,0,.25);max-height:90vh;overflow:auto}
-.preview-box{width:min(520px,96vw)}
-.login-box h3,.preview-box h3{margin:0 0 12px;color:var(--primary);text-align:center}
-.kbd{display:inline-block;background:rgba(0,0,0,.08);border:1px solid var(--border);border-radius:4px;padding:1px 5px;font-size:10px;margin-right:2px;font-family:monospace}
-.settings-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
-@media(max-width:700px){.settings-grid{grid-template-columns:1fr}}
-.help-box{max-height:380px;overflow:auto;font-size:12px;line-height:1.7}
-.help-box h4{margin:12px 0 4px;color:var(--primary-2)}
-.logo-preview{max-height:48px;max-width:120px;border-radius:6px;margin-top:4px}
-.preview-receipt{border:1px solid #ccc;padding:12px;border-radius:8px;background:#fff;color:#000;font-size:12px}
-.preview-receipt .row{display:flex;justify-content:space-between;border-bottom:1px dashed #aaa;padding:4px 0;margin:2px 0}
-.field-error{border-color:#b42318!important;box-shadow:0 0 0 2px rgba(180,35,24,.15)!important}
-.dashboard-wrap{display:grid;grid-template-columns:1fr 1fr;gap:14px;align-items:start}
-@media(max-width:800px){.dashboard-wrap{grid-template-columns:1fr}}
-.gauge-card{text-align:center;padding:16px}
-.gauge-svg{width:min(280px,90%);height:auto;margin:0 auto;display:block}
-.gauge-num{font-size:42px;font-weight:800;color:var(--primary);margin:8px 0 2px;font-variant-numeric:tabular-nums}
-.gauge-unit{font-size:13px;color:var(--muted)}
-.stat-cards{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:12px}
-.stat-card{border-radius:12px;padding:14px 10px;text-align:center;color:#fff;box-shadow:var(--shadow)}
-.stat-card .val{font-size:22px;font-weight:800;margin:4px 0}
+.weight-box .live{font-size:48px;font-weight:800;margin:8px 0 2px}
+.stat-cards{display:grid;grid-template-columns:1fr;gap:8px;margin-top:8px}
+.stat-card{border-radius:12px;padding:12px;text-align:center;color:#fff}
+.stat-card .val{font-size:20px;font-weight:800}
 .stat-card .lbl{font-size:11px;opacity:.9}
 .stat-count{background:linear-gradient(135deg,#1b7a4b,#2ecc71)}
 .stat-gross{background:linear-gradient(135deg,#1a5f9e,#3498db)}
 .stat-net{background:linear-gradient(135deg,#c45c12,#e67e22)}
-.dash-hint{font-size:12px;color:var(--muted);margin-top:10px;text-align:center}
+table{width:100%;border-collapse:collapse;font-size:11px;margin-top:8px}
+th,td{border:1px solid var(--border);padding:6px;text-align:right}
+th{background:var(--accent);color:var(--muted);font-weight:600}
+.badge{display:inline-block;padding:2px 7px;border-radius:999px;font-size:10px;font-weight:600;background:var(--accent);color:var(--primary-2)}
+.badge.complete{background:#e7f6ee;color:var(--primary)}
+.badge.incomplete{background:#fff1e5;color:var(--warn)}
 </style>
 </head>
 <body>
 <div class="app">
-  <div id="storageWarn" class="errbox"></div>
   <div class="topbar">
     <div class="brand">
-      <img id="logoImg" src="" alt="" style="display:none" />
-      <div>
-        <h1 id="companyName1">شرکت تعاونی کشاورزی باغداران مرکبات رامسر</h1>
-        <p id="companyName2">نرم‌افزار مدیریت باسکول | نسخه آفلاین</p>
-      </div>
+      <h1>🏀 باسکول | رامسر</h1>
+      <p>نرم‌افزار مدیریت توزین مرکبات</p>
     </div>
     <div class="tabs" id="tabs">
-      <button type="button" class="tab-btn active" data-tab="dashboard"><span class="icol">📊</span> داشبورد</button>
-      <button type="button" class="tab-btn" data-tab="purchase"><span class="icol">🍊</span> خرید مرکبات</button>
-      <button type="button" class="tab-btn" data-tab="normal"><span class="icol">⚖️</span> توزین معمولی</button>
-      <button type="button" class="tab-btn" data-tab="incomplete"><span class="icol">⏳</span> توزین‌های ناقص <span class="tab-badge" id="incompleteBadge" style="display:none">0</span></button>
-      <button type="button" class="tab-btn" data-tab="reports" data-admin-only="1" id="tabReports"><span class="icol">🔒</span> گزارش‌ها</button>
-      <button type="button" class="tab-btn" data-tab="definitions" data-admin-only="1" id="tabDefinitions"><span class="icol">🔒</span> تعاریف</button>
-      <button type="button" class="tab-btn" data-tab="settings" data-admin-only="1" id="tabSettings"><span class="icol">🔒</span> تنظیمات</button>
-      <button type="button" class="tab-btn" data-tab="help"><span class="icol">❓</span> راهنما</button>
-      <button type="button" class="tab-btn" id="btnAppLogout" style="background:#fdecec;color:#b42318"><span class="icol">🚪</span> خروج</button>
+      <button class="tab-btn active" data-tab="dashboard">📊 داشبورد</button>
+      <button class="tab-btn" data-tab="purchase">🍊 خرید</button>
+      <button class="tab-btn" data-tab="normal">⚖️ معمولی</button>
+      <button class="tab-btn" data-tab="reports">📋 گزارش‌ها</button>
+      <button class="tab-btn" data-tab="definitions">📚 تعاریف</button>
+      <button class="tab-btn" data-tab="settings">⚙️ تنظیمات</button>
+      <button class="tab-btn" data-tab="help">❓ راهنما</button>
+      <button class="tab-btn" id="btnLogout" style="background:#fdecec;color:#b42318">🚪 خروج</button>
     </div>
   </div>
 
@@ -192,277 +91,554 @@ tfoot{position:sticky;bottom:0;z-index:2;box-shadow:0 -4px 12px rgba(15,92,56,.2
       <!-- داشبورد -->
       <section id="dashboard" class="section active card">
         <h2>داشبورد باسکول</h2>
-        <div style="text-align:center;max-width:520px;margin:0 auto">
-          <svg class="gauge-svg" style="width:min(440px,96%)" viewBox="0 0 220 145" id="gaugeSvg">
-            <defs>
-              <linearGradient id="gaugeGrad" x1="0%" y1="0%" x2="100%" y2="0%">
-                <stop offset="0%" style="stop-color:#27ae60"/>
-                <stop offset="40%" style="stop-color:#f1c40f"/>
-                <stop offset="75%" style="stop-color:#e67e22"/>
-                <stop offset="100%" style="stop-color:#e74c3c"/>
-              </linearGradient>
-            </defs>
-            <path d="M 25 120 A 85 85 0 0 1 195 120" fill="none" stroke="#e0e8e3" stroke-width="18" stroke-linecap="round"/>
-            <path d="M 25 120 A 85 85 0 0 1 195 120" fill="none" stroke="url(#gaugeGrad)" stroke-width="18" stroke-linecap="round" opacity="0.92"/>
-            <g id="gaugeTicks" fill="#4a5c54" font-size="8" text-anchor="middle"></g>
-            <g id="gaugeNeedle" transform="rotate(-90 110 120)">
-              <line x1="110" y1="120" x2="110" y2="42" stroke="#1f2d26" stroke-width="4" stroke-linecap="round"/>
-              <circle cx="110" cy="120" r="11" fill="#1b7a4b" stroke="#fff" stroke-width="2"/>
-            </g>
-          </svg>
-          <div class="gauge-num" id="dashLiveWeight" style="font-size:clamp(48px,6vw,72px)">0</div>
-          <div class="gauge-unit" style="font-size:16px">کیلوگرم</div>
-          <div class="dash-hint" id="dashConnStatus" style="margin:8px 0 16px">آماده برای توزین</div>
-          <div class="actions" style="justify-content:center;gap:12px">
-            <button type="button" class="btn btn-primary" id="btnDashRefresh" style="padding:12px 20px;font-size:14px">بروزرسانی آمار</button>
-            <button type="button" class="btn btn-secondary" id="btnDashToPurchase" style="padding:12px 20px;font-size:14px">ثبت خرید جدید</button>
+        <div style="text-align:center">
+          <div style="font-size:48px;font-weight:800;color:var(--primary);margin:20px 0">تعداد قبض‌ها: <span id="dashCount">0</span></div>
+          <div class="actions" style="justify-content:center">
+            <button class="btn btn-primary" id="btnDashToPurchase">ثبت خرید جدید</button>
+            <button class="btn btn-secondary" id="btnDashRefresh">بروزرسانی</button>
           </div>
-          <div class="notice" style="margin-top:14px" id="dashSummary">آمار خرید امروز در پنل سمت چپ نمایش داده می‌شود.</div>
         </div>
       </section>
 
       <!-- خرید مرکبات -->
-      <section id="purchase" class="section card form-mode-full">
+      <section id="purchase" class="section card">
         <h2>توزین خرید مرکبات</h2>
-        <div class="mode-bar" id="purchaseStepBar">
-          <button type="button" class="btn active-full" id="btnStepW1" disabled>① وزن اول</button>
-          <button type="button" class="btn idle" id="btnStepW2" disabled>② وزن دوم</button>
-        </div>
-        <div class="notice" id="purchaseModeHint">توزین خرید مرکبات — ابتدا وزن اول را بگیرید، سپس وزن دوم. رنگ فرم با هر مرحله عوض می‌شود.</div>
         <div class="form-grid">
-          <div class="half"><label>پلاک خودرو (۷ رقم — مثل 72 464 25)</label><input type="text" id="p_plate" class="ltr-num num-lg" list="platesList" placeholder="72 464 25" inputmode="numeric" maxlength="9" autocomplete="off" dir="ltr" /></div>
+          <div class="half"><label>پلاک خودرو</label><input type="text" id="p_plate" placeholder="72 464 25" /></div>
           <div><label>تاریخ و ساعت</label><input type="text" id="p_datetime" readonly /></div>
-          <div><label>شماره قبض</label><input type="text" id="p_receiptNo" readonly class="ltr-num" /></div>
-          <div><label>کالای خریداری</label><select id="p_product"></select></div>
-          <div><label>گروه مشتریان</label><select id="p_group"></select></div>
-          <div><label>راننده</label><input type="text" id="p_driver" list="driversList" autocomplete="off" /></div>
-          <div><label>وزن اول</label><input type="number" id="p_w1" class="num-lg" readonly step="1" /></div>
-          <div><label>وزن دوم</label><input type="number" id="p_w2" class="num-lg" readonly step="1" /></div>
-          <div><label>وزن ناخالص</label><input type="number" id="p_gross" class="num-lg" readonly step="1" /></div>
-          <div><label>درصد افت %</label><input type="number" id="p_wastePercent" min="0" max="100" step="1" value="0" class="num-lg" /></div>
-          <div><label>وزن افت</label><input type="number" id="p_wasteWeight" class="num-lg" readonly step="1" /></div>
-          <div><label>وزن خالص نهایی</label><input type="number" id="p_net" class="num-lg" readonly step="1" /></div>
-          <div class="full"><label>توضیحات</label><textarea id="p_note" rows="1"></textarea></div>
+          <div><label>شماره قبض</label><input type="text" id="p_receiptNo" readonly /></div>
+          <div><label>کالا</label><select id="p_product"><option>پرتقال</option><option>نارنگی</option><option>لیمو</option></select></div>
+          <div><label>راننده</label><input type="text" id="p_driver" /></div>
+          <div><label>طرف حساب</label><input type="text" id="p_party" /></div>
+          <div><label>وزن اول</label><input type="number" id="p_w1" class="num-lg" readonly /></div>
+          <div><label>وزن دوم</label><input type="number" id="p_w2" class="num-lg" readonly /></div>
+          <div><label>ناخالص</label><input type="number" id="p_gross" class="num-lg" readonly /></div>
+          <div><label>درصد افت</label><input type="number" id="p_wastePercent" min="0" max="100" value="0" /></div>
+          <div><label>وزن افت</label><input type="number" id="p_wasteWeight" class="num-lg" readonly /></div>
+          <div><label>خالص</label><input type="number" id="p_net" class="num-lg" readonly /></div>
+          <div class="full"><label>توضیحات</label><textarea id="p_note" rows="2"></textarea></div>
         </div>
         <div class="actions">
-          <button type="button" class="btn btn-primary" id="btnCapturePurchase">⚖️ گرفتن وزن <span class="kbd">F5</span></button>
-          <button type="button" class="btn btn-secondary" id="btnSavePurchaseOnly">💾 فقط ذخیره <span class="kbd">F6</span></button>
-          <button type="button" class="btn btn-primary" id="btnSavePurchasePrint">🖨️ ذخیره + چاپ <span class="kbd">F7</span></button>
-          <button type="button" class="btn btn-secondary" id="btnResetPurchase">🧹 پاک‌سازی <span class="kbd">F8</span></button>
-          <button type="button" class="btn btn-secondary" id="btnPreviewPurchase">پیش‌نمایش چاپ <span class="kbd">F10</span></button>
+          <button class="btn btn-primary" id="btnCapturePurchase">⚖️ گرفتن وزن (F5)</button>
+          <button class="btn btn-secondary" id="btnSavePurchase">💾 ذخیره (F6)</button>
+          <button class="btn btn-secondary" id="btnResetPurchase">🧹 پاک‌سازی (F8)</button>
         </div>
-        <input type="hidden" id="p_editId" value="" />
-        <input type="hidden" id="p_w1Time" value="" />
-        <input type="hidden" id="p_w2Time" value="" />
+        <input type="hidden" id="p_editId" />
       </section>
 
       <!-- معمولی -->
-      <section id="normal" class="section card form-mode-full">
+      <section id="normal" class="section card">
         <h2>توزین معمولی</h2>
         <div class="form-grid">
-          <div class="half"><label>پلاک خودرو (۷ رقم — مثل 72 464 25)</label><input type="text" id="n_plate" class="ltr-num num-lg" list="platesList" placeholder="72 464 25" inputmode="numeric" maxlength="9" autocomplete="off" dir="ltr" /></div>
+          <div class="half"><label>پلاک خودرو</label><input type="text" id="n_plate" /></div>
           <div><label>تاریخ و ساعت</label><input type="text" id="n_datetime" readonly /></div>
-          <div><label>شماره قبض</label><input type="text" id="n_receiptNo" readonly class="ltr-num" /></div>
-          <div><label>طرف حساب</label><input type="text" id="n_party" list="partiesList" autocomplete="off" /></div>
-          <div><label>راننده</label><input type="text" id="n_driver" list="driversList" autocomplete="off" /></div>
-          <div><label>کالا</label><input type="text" id="n_product" list="productsList" autocomplete="off" /></div>
-          <div><label>وزن اول</label><input type="number" id="n_w1" class="num-lg" readonly step="1" /></div>
-          <div><label>وزن دوم</label><input type="number" id="n_w2" class="num-lg" readonly step="1" /></div>
-          <div><label>وزن ناخالص</label><input type="number" id="n_gross" class="num-lg" readonly step="1" /></div>
-          <div><label>وزن ظروف بسته‌بندی</label><input type="number" id="n_pack" class="num-lg" min="0" step="1" value="0" /></div>
-          <div><label>وزن خالص</label><input type="number" id="n_net" class="num-lg" readonly step="1" /></div>
-          <div class="full"><label>توضیحات</label><textarea id="n_note" rows="1"></textarea></div>
+          <div><label>شماره قبض</label><input type="text" id="n_receiptNo" readonly /></div>
+          <div><label>طرف حساب</label><input type="text" id="n_party" /></div>
+          <div><label>راننده</label><input type="text" id="n_driver" /></div>
+          <div><label>کالا</label><input type="text" id="n_product" /></div>
+          <div><label>وزن اول</label><input type="number" id="n_w1" class="num-lg" readonly /></div>
+          <div><label>وزن دوم</label><input type="number" id="n_w2" class="num-lg" readonly /></div>
+          <div><label>ناخالص</label><input type="number" id="n_gross" class="num-lg" readonly /></div>
+          <div><label>ظروف</label><input type="number" id="n_pack" value="0" /></div>
+          <div><label>خالص</label><input type="number" id="n_net" class="num-lg" readonly /></div>
+          <div class="full"><label>توضیحات</label><textarea id="n_note" rows="2"></textarea></div>
         </div>
         <div class="actions">
-          <button type="button" class="btn btn-primary" id="btnCaptureNormal">گرفتن وزن <span class="kbd">F5</span></button>
-          <button type="button" class="btn btn-secondary" id="btnSaveNormalOnly">فقط ذخیره <span class="kbd">F6</span></button>
-          <button type="button" class="btn btn-primary" id="btnSaveNormalPrint">ذخیره + چاپ <span class="kbd">F7</span></button>
-          <button type="button" class="btn btn-secondary" id="btnResetNormal">پاک‌سازی <span class="kbd">F8</span></button>
-          <button type="button" class="btn btn-secondary" id="btnPreviewNormal">پیش‌نمایش چاپ <span class="kbd">F10</span></button>
+          <button class="btn btn-primary" id="btnCaptureNormal">⚖️ گرفتن وزن (F5)</button>
+          <button class="btn btn-secondary" id="btnSaveNormal">💾 ذخیره (F6)</button>
+          <button class="btn btn-secondary" id="btnResetNormal">🧹 پاک‌سازی (F8)</button>
         </div>
-        <input type="hidden" id="n_editId" value="" />
-        <input type="hidden" id="n_w1Time" value="" />
-        <input type="hidden" id="n_w2Time" value="" />
-      </section>
-
-      <!-- ناقص -->
-      <section id="incomplete" class="section card">
-        <h2>توزین‌های ناقص (تک‌وزنه)</h2>
-        <div class="actions" style="margin-top:0;margin-bottom:8px">
-          <button type="button" class="btn btn-secondary" id="btnRefreshIncomplete">بروزرسانی</button>
-        </div>
-        <div class="table-wrap">
-          <table>
-            <thead><tr><th>قبض</th><th>نوع</th><th>تاریخ</th><th>پلاک</th><th>راننده</th><th>وزن اول</th><th>وضعیت</th><th>عملیات</th></tr></thead>
-            <tbody id="incompleteBody"></tbody>
-          </table>
-        </div>
+        <input type="hidden" id="n_editId" />
       </section>
 
       <!-- گزارش‌ها -->
       <section id="reports" class="section card">
         <h2>📋 گزارش‌ها</h2>
-        <div class="filters">
-          <div><label>از تاریخ</label><select id="f_from"><option value="">همه</option></select></div>
-          <div><label>تا تاریخ</label><select id="f_to"><option value="">همه</option></select></div>
-          <div><label>تاریخ یک‌روزه</label><select id="f_day"><option value="">همه</option></select></div>
-          <div><label>نوع</label><select id="f_type"><option value="all">همه</option><option value="purchase">خرید</option><option value="normal">معمولی</option></select></div>
+        <div class="actions">
+          <button class="btn btn-secondary" id="btnExcel">📊 Excel</button>
+          <button class="btn btn-secondary" id="btnPdf">🖨️ PDF</button>
+          <button class="btn btn-secondary" id="btnClearRecords">🧹 پاک‌سازی</button>
         </div>
-        <div class="actions" style="margin-top:0">
-          <button type="button" class="btn btn-warn" id="btnClearFilters">🧹 حذف فیلتر</button>
-          <button type="button" class="btn btn-secondary" id="btnExcel">📊 Excel</button>
-          <button type="button" class="btn btn-secondary" id="btnPdf">🖨️ PDF</button>
-          <button type="button" class="btn btn-secondary" id="btnPng">🖼️ تصویر</button>
-        </div>
-        <div class="table-wrap" style="margin-top:8px">
-          <table>
-            <thead id="recordsHead"></thead>
-            <tbody id="recordsBody"></tbody>
-            <tfoot id="recordsFoot"></tfoot>
-          </table>
-        </div>
+        <table>
+          <thead>
+            <tr><th>قبض</th><th>نوع</th><th>پلاک</th><th>طرف‌حساب</th><th>خالص</th><th>عملیات</th></tr>
+          </thead>
+          <tbody id="recordsBody"></tbody>
+        </table>
       </section>
 
       <!-- تعاریف -->
       <section id="definitions" class="section card">
-        <h2>تعاریف پایه</h2>
-        <div class="notice">با تایپ آزاد در فرم‌ها مورد جدید خودکار ذخیره می‌شود.</div>
-        <div class="form-grid" style="grid-template-columns:1fr 1fr">
-          <div>
-            <label>گروه مشتریان جدید</label>
-            <input type="text" id="def_group" />
-            <div class="actions"><button type="button" class="btn btn-primary btn-sm" data-add-def="groups" data-input="def_group">افزودن</button></div>
-          </div>
-          <div>
-            <label>راننده جدید</label>
-            <input type="text" id="def_driver" />
-            <div class="actions"><button type="button" class="btn btn-primary btn-sm" data-add-def="drivers" data-input="def_driver">افزودن</button></div>
-          </div>
+        <h2>تعاریف</h2>
+        <div class="form-grid">
+          <div><label>گروه مشتریان</label><input type="text" id="def_group" /></div>
+          <div><label>راننده</label><input type="text" id="def_driver" /></div>
+          <div class="actions"><button class="btn btn-primary btn-sm" id="btnAddDef">افزودن</button></div>
         </div>
-        <div class="form-grid" style="grid-template-columns:1fr 1fr;margin-top:8px">
-          <div class="table-wrap"><table><thead><tr><th>گروه مشتریان</th><th></th></tr></thead><tbody id="defGroupsBody"></tbody></table></div>
-          <div class="table-wrap"><table><thead><tr><th>رانندگان</th><th></th></tr></thead><tbody id="defDriversBody"></tbody></table></div>
-        </div>
+        <table>
+          <thead><tr><th>گروه‌ها</th><th>رانندگان</th></tr></thead>
+          <tbody>
+            <tr><td><ul id="groupsList"></ul></td><td><ul id="driversList"></ul></td></tr>
+          </tbody>
+        </table>
       </section>
 
       <!-- تنظیمات -->
       <section id="settings" class="section card">
-        <h2>🔒 تنظیمات برنامه</h2>
-        <div class="lock-overlay" id="settingsLock">
-          <div>
-            <div style="font-size:42px;margin-bottom:8px">🔐</div>
-            <div style="font-weight:700;font-size:15px;margin-bottom:6px">دسترسی فقط برای مدیر</div>
-            <button type="button" class="btn btn-primary" id="btnUnlockSettings">ورود مدیر به تنظیمات</button>
-          </div>
+        <h2>⚙️ تنظیمات</h2>
+        <div class="form-grid">
+          <div><label>نام شرکت</label><input type="text" id="set_name" value="تعاونی باغداران مرکبات رامسر" /></div>
+          <div><label>تم</label><select id="set_theme"><option value="green">سبز</option><option value="blue">آبی</option><option value="orange">نارنجی</option><option value="dark">تیره</option></select></div>
+          <div><label>رمز مدیر</label><input type="password" id="set_pass" value="1234" /></div>
+          <div></div>
         </div>
-        <div class="settings-grid" id="settingsContent">
-          <div>
-            <label>نام شرکت</label>
-            <input type="text" id="set_name1" />
-            <label style="margin-top:6px">تم رنگی</label>
-            <select id="set_theme">
-              <option value="green">سبز</option>
-              <option value="blue">آبی</option>
-              <option value="orange">نارنجی</option>
-              <option value="dark">تیره</option>
-            </select>
-            <div class="actions"><button type="button" class="btn btn-primary btn-sm" id="btnApplyTheme">اعمال تم</button></div>
-          </div>
-          <div>
-            <label>رمز مدیر</label>
-            <input type="password" id="set_admin_pass" placeholder="رمز جدید" />
-            <div class="actions" style="margin-top:6px"><button type="button" class="btn btn-warn btn-sm" id="btnChangeAdminPass">تغییر رمز</button></div>
-          </div>
-        </div>
-        <div class="actions" style="margin-top:12px;justify-content:center">
-          <button type="button" class="btn btn-primary" id="btnBackup">💾 پشتیبان JSON</button>
-          <label class="btn btn-secondary" style="display:inline-block;cursor:pointer">
-            🔄 بازیابی
-            <input type="file" id="restoreFile" accept=".json" style="display:none" />
-          </label>
+        <div class="actions">
+          <button class="btn btn-primary" id="btnSaveSettings">ذخیره تنظیمات</button>
+          <button class="btn btn-secondary" id="btnBackup">💾 پشتیبان</button>
         </div>
       </section>
 
       <!-- راهنما -->
       <section id="help" class="section card">
         <h2>راهنمای استفاده</h2>
-        <div class="help-box">
-          <h4>۱. خرید مرکبات</h4>
-          <p>توزین خرید مرکبات: ابتدا <b>وزن اول</b> سپس <b>وزن دوم</b>. رنگ فرم سبز (اول) و زرد (دوم) می‌شود. با <span class="kbd">F5</span> وزن ثبت می‌شود.</p>
-          <h4>۲. میانبرها</h4>
-          <p><span class="kbd">F5</span> گرفتن وزن | <span class="kbd">F6</span> ذخیره | <span class="kbd">F7</span> ذخیره+چاپ | <span class="kbd">F8</span> پاک‌سازی | <span class="kbd">F10</span> پیش‌نمایش</p>
-          <h4>۳. شماره قبض</h4>
-          <p>شماره قبض خودکار بر اساس سال شمسی صادر می‌شود: مثلاً 140500001</p>
-          <h4>۴. قفل قبض کامل</h4>
-          <p>پس از ثبت کامل، قبض قفل می‌شود و قابل تغییر نیست (فقط مدیر می‌تواند حذف کند).</p>
+        <div class="notice">
+          <h4>مراحل استفاده:</h4>
+          <p>۱. وارد تب <b>خرید</b> یا <b>معمولی</b> شوید</p>
+          <p>۲. اطلاعات خودرو را وارد کنید</p>
+          <p>۳. با F5 وزن اول و دوم را بگیرید</p>
+          <p>۴. دکمه ذخیره (F6) را بزنید</p>
+          <p>۵. در تب گزارش‌ها، تمام قبض‌ها را ببینید</p>
+          <hr>
+          <h4>میانبرهای صفحه‌کلید:</h4>
+          <p>F5: گرفتن وزن | F6: ذخیره | F8: پاک‌سازی</p>
         </div>
       </section>
     </div>
 
-    <div class="side-sticky">
+    <div>
       <div class="card">
         <div class="weight-box">
-          <div class="status-pill" id="connStatus">آماده</div>
+          <div style="font-size:14px">وزن زنده</div>
           <div class="live" id="liveWeight">0</div>
-          <div class="meta">کیلوگرم | عدد صحیح</div>
+          <div style="font-size:11px;opacity:.9">کیلوگرم</div>
         </div>
         <div class="actions">
-          <button type="button" class="btn btn-secondary btn-sm" id="btnManualLive">⌨️ ورود دستی</button>
-          <button type="button" class="btn btn-secondary btn-sm" id="btnConnectSerial">🔌 اتصال سریال</button>
+          <button class="btn btn-secondary btn-sm" id="btnManualWeight">⌨️ ورود دستی</button>
         </div>
-        <h3 style="margin:12px 0 4px;font-size:13px;color:var(--primary-2);font-family:Calibri,Tahoma,sans-serif">آمار خرید امروز</h3>
-        <div id="sideDashDate" style="text-align:center;font-size:12px;font-weight:700;color:var(--muted);margin-bottom:8px">—</div>
-        <div class="stat-cards" style="grid-template-columns:1fr">
-          <div class="stat-card stat-count" style="padding:10px">
-            <div class="lbl">تعداد خودرو</div>
-            <div class="val" id="sideDashCount" style="font-size:20px">0</div>
+        <h3 style="margin:12px 0 4px;font-size:13px;color:var(--primary-2)">آمار امروز</h3>
+        <div id="sideDashDate" style="text-align:center;font-size:12px;margin-bottom:8px">—</div>
+        <div class="stat-cards">
+          <div class="stat-card stat-count">
+            <div class="lbl">تعداد</div>
+            <div class="val" id="sideDashCount">0</div>
           </div>
-          <div class="stat-card stat-gross" style="padding:10px">
-            <div class="lbl">ناخالص (kg)</div>
-            <div class="val" id="sideDashGross" style="font-size:20px">0</div>
+          <div class="stat-card stat-gross">
+            <div class="lbl">ناخالص</div>
+            <div class="val" id="sideDashGross">0</div>
           </div>
-          <div class="stat-card stat-net" style="padding:10px">
-            <div class="lbl">خالص (kg)</div>
-            <div class="val" id="sideDashNet" style="font-size:20px">0</div>
+          <div class="stat-card stat-net">
+            <div class="lbl">خالص</div>
+            <div class="val" id="sideDashNet">0</div>
           </div>
         </div>
       </div>
     </div>
   </div>
-  <div class="footer-note">طراحی و توسعه: امیرحسین فلکیان | نسخه ۱.۰</div>
 </div>
 
 <div class="login-overlay" id="loginOverlay">
   <div class="login-box">
-    <h3>ورود به سامانه باسکول</h3>
-    <label>نام کاربری</label>
-    <input type="text" id="loginUser" />
-    <label style="margin-top:8px">رمز عبور</label>
+    <h3>ورود به سامانه</h3>
+    <label>رمز مدیر</label>
     <input type="password" id="loginPass" />
     <div class="actions" style="margin-top:12px;justify-content:center">
-      <button type="button" class="btn btn-primary" id="btnLogin">ورود</button>
+      <button class="btn btn-primary" id="btnLogin">ورود</button>
     </div>
-    <div class="notice" style="margin-top:10px;text-align:center">اگر کاربری تعریف نشده، با هر نامی وارد شوید.</div>
   </div>
 </div>
 
 <div class="preview-overlay" id="previewOverlay">
   <div class="preview-box">
-    <h3>پیش‌نمایش قبض باسکول</h3>
-    <div id="previewContent" class="preview-receipt"></div>
-    <div class="actions" style="justify-content:center;margin-top:12px">
-      <button type="button" class="btn btn-primary" id="btnPreviewPrint">چاپ</button>
-      <button type="button" class="btn btn-secondary" id="btnPreviewClose">بستن</button>
+    <h3>پیش‌نمایش قبض</h3>
+    <div id="previewContent"></div>
+    <div class="actions" style="justify-content:center">
+      <button class="btn btn-primary" id="btnPrint">چاپ</button>
+      <button class="btn btn-secondary" id="btnPreviewClose">بستن</button>
     </div>
   </div>
 </div>
 
-<datalist id="driversList"></datalist>
-<datalist id="partiesList"></datalist>
-<datalist id="productsList"></datalist>
-<datalist id="platesList"></datalist>
 <div class="toast" id="toast"></div>
 
-<script src="app.js"></script>
+<script>
+'use strict';
+
+// متغیرهای سراسری
+let db = {
+  records: [],
+  groups: [],
+  drivers: [],
+  settings: { name: 'تعاونی باغداران مرکبات رامسر', theme: 'green', pass: '1234' }
+};
+let liveWeight = 0;
+let currentUser = null;
+const DB_KEY = 'bascul_db_v1';
+
+// توابع کمکی
+const $ = id => document.getElementById(id);
+const toast = msg => {
+  const t = $('toast');
+  t.textContent = msg;
+  t.style.display = 'block';
+  setTimeout(() => t.style.display = 'none', 2000);
+};
+
+const toEnglishDigits = str => String(str).replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+const roundInt = v => Math.round(Number(toEnglishDigits(v)) || 0);
+const nowDate = () => new Date().toLocaleDateString('fa-IR').replace(/\//g, '/');
+const nowDateTime = () => new Date().toLocaleString('fa-IR').split(',')[1] || '';
+
+// بارگذاری و ذخیره‌سازی
+function loadDB() {
+  try {
+    const saved = localStorage.getItem(DB_KEY);
+    if (saved) db = JSON.parse(saved);
+  } catch (e) {}
+}
+
+function saveDB() {
+  try {
+    localStorage.setItem(DB_KEY, JSON.stringify(db));
+  } catch (e) {
+    alert('خطا در ذخیره‌سازی');
+  }
+}
+
+// تبدیل شماره قبض
+function getNextReceipt() {
+  return String(db.records.length + 1).padStart(5, '0');
+}
+
+// محاسبات خرید
+function calcPurchase() {
+  const w1 = roundInt($('p_w1').value);
+  const w2 = roundInt($('p_w2').value);
+  const wp = roundInt($('p_wastePercent').value);
+  const gross = w1 > 0 && w2 > 0 ? Math.abs(w1 - w2) : 0;
+  const waste = gross > 0 ? Math.round(gross * wp / 100) : 0;
+  const net = Math.max(0, gross - waste);
+  
+  $('p_gross').value = gross || '';
+  $('p_wasteWeight').value = waste || '';
+  $('p_net').value = net || '';
+}
+
+function calcNormal() {
+  const w1 = roundInt($('n_w1').value);
+  const w2 = roundInt($('n_w2').value);
+  const pack = roundInt($('n_pack').value);
+  const gross = w1 > 0 && w2 > 0 ? Math.abs(w1 - w2) : 0;
+  const net = Math.max(0, gross - pack);
+  
+  $('n_gross').value = gross || '';
+  $('n_net').value = net || '';
+}
+
+// گرفتن وزن
+function captureWeight(type) {
+  if (liveWeight <= 0) {
+    alert('وزن معتبر نیست');
+    return;
+  }
+  
+  if (type === 'purchase') {
+    const w1 = roundInt($('p_w1').value);
+    if (!w1) {
+      $('p_w1').value = liveWeight;
+    } else {
+      $('p_w2').value = liveWeight;
+    }
+    calcPurchase();
+  } else {
+    const w1 = roundInt($('n_w1').value);
+    if (!w1) {
+      $('n_w1').value = liveWeight;
+    } else {
+      $('n_w2').value = liveWeight;
+    }
+    calcNormal();
+  }
+  toast(`وزن: ${liveWeight} kg`);
+}
+
+// ذخیره قبض
+function saveRecord(type) {
+  if (type === 'purchase') {
+    const w1 = roundInt($('p_w1').value);
+    const w2 = roundInt($('p_w2').value);
+    
+    if (!w1) { alert('حداقل وزن اول لازم است'); return; }
+    
+    const rec = {
+      id: 'R' + Date.now(),
+      type: 'purchase',
+      receipt: getNextReceipt(),
+      date: nowDate(),
+      plate: $('p_plate').value || '—',
+      product: $('p_product').value,
+      driver: $('p_driver').value,
+      party: $('p_party').value,
+      w1, w2,
+      gross: roundInt($('p_gross').value),
+      wastePercent: roundInt($('p_wastePercent').value),
+      wasteWeight: roundInt($('p_wasteWeight').value),
+      net: roundInt($('p_net').value),
+      note: $('p_note').value,
+      status: w2 > 0 ? 'complete' : 'incomplete'
+    };
+    
+    db.records.push(rec);
+    saveDB();
+    resetPurchase();
+    toast('✅ قبض ذخیره شد');
+  } else {
+    const w1 = roundInt($('n_w1').value);
+    const w2 = roundInt($('n_w2').value);
+    
+    if (!w1) { alert('حداقل وزن اول لازم است'); return; }
+    
+    const rec = {
+      id: 'R' + Date.now(),
+      type: 'normal',
+      receipt: getNextReceipt(),
+      date: nowDate(),
+      plate: $('n_plate').value || '—',
+      product: $('n_product').value,
+      driver: $('n_driver').value,
+      party: $('n_party').value,
+      w1, w2,
+      gross: roundInt($('n_gross').value),
+      net: roundInt($('n_net').value),
+      note: $('n_note').value
+    };
+    
+    db.records.push(rec);
+    saveDB();
+    resetNormal();
+    toast('✅ قبض ذخیره شد');
+  }
+  
+  updateDashboard();
+  renderRecords();
+}
+
+// بازنشانی فرم‌ها
+function resetPurchase() {
+  $('p_plate').value = '';
+  $('p_datetime').value = nowDateTime();
+  $('p_receiptNo').value = getNextReceipt();
+  $('p_w1').value = '';
+  $('p_w2').value = '';
+  $('p_gross').value = '';
+  $('p_wastePercent').value = 0;
+  $('p_wasteWeight').value = '';
+  $('p_net').value = '';
+  $('p_driver').value = '';
+  $('p_party').value = '';
+  $('p_note').value = '';
+}
+
+function resetNormal() {
+  $('n_plate').value = '';
+  $('n_datetime').value = nowDateTime();
+  $('n_receiptNo').value = getNextReceipt();
+  $('n_w1').value = '';
+  $('n_w2').value = '';
+  $('n_gross').value = '';
+  $('n_pack').value = 0;
+  $('n_net').value = '';
+  $('n_driver').value = '';
+  $('n_party').value = '';
+  $('n_note').value = '';
+}
+
+// نمایش گزارش‌ها
+function renderRecords() {
+  const body = $('recordsBody');
+  if (!db.records.length) {
+    body.innerHTML = '<tr><td colspan="6">موردی ندارد</td></tr>';
+    return;
+  }
+  
+  body.innerHTML = db.records.map((r, i) => `
+    <tr>
+      <td>${r.receipt}</td>
+      <td>${r.type === 'purchase' ? 'خرید' : 'معمولی'}</td>
+      <td>${r.plate}</td>
+      <td>${r.party || '—'}</td>
+      <td>${r.net || 0}</td>
+      <td>
+        <button class="btn btn-sm btn-secondary" onclick="deleteRecord(${i})">حذف</button>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// حذف قبض
+function deleteRecord(index) {
+  if (confirm('حذف این قبض؟')) {
+    db.records.splice(index, 1);
+    saveDB();
+    renderRecords();
+    updateDashboard();
+    toast('✅ حذف شد');
+  }
+}
+
+// بروزرسانی داشبورد
+function updateDashboard() {
+  $('dashCount').textContent = db.records.length;
+  
+  const today = nowDate();
+  const todayRecords = db.records.filter(r => r.date === today);
+  
+  $('sideDashDate').textContent = `تاریخ: ${today}`;
+  $('sideDashCount').textContent = todayRecords.length;
+  
+  const totalGross = todayRecords.reduce((s, r) => s + (r.gross || 0), 0);
+  const totalNet = todayRecords.reduce((s, r) => s + (r.net || 0), 0);
+  
+  $('sideDashGross').textContent = totalGross;
+  $('sideDashNet').textContent = totalNet;
+}
+
+// تغییر تب
+function switchTab(tabId) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.toggle('active', b.getAttribute('data-tab') === tabId));
+  document.querySelectorAll('.section').forEach(s => s.classList.toggle('active', s.id === tabId));
+  
+  if (tabId === 'dashboard') updateDashboard();
+  if (tabId === 'reports') renderRecords();
+  if (tabId === 'purchase') resetPurchase();
+  if (tabId === 'normal') resetNormal();
+}
+
+// خروجی Excel
+function exportExcel() {
+  let csv = 'قبض,نوع,تاریخ,پلاک,طرف‌حساب,خالص\n';
+  db.records.forEach(r => {
+    csv += `${r.receipt},${r.type},${r.date},${r.plate},${r.party || '—'},${r.net || 0}\n`;
+  });
+  
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = 'bascul-' + nowDate() + '.csv';
+  a.click();
+  toast('📊 دانلود شد');
+}
+
+// رویدادها
+function bindEvents() {
+  // تبدیل تب‌ها
+  $('tabs').addEventListener('click', e => {
+    const btn = e.target.closest('.tab-btn');
+    if (!btn) return;
+    if (btn.id === 'btnLogout') {
+      currentUser = null;
+      location.reload();
+      return;
+    }
+    switchTab(btn.getAttribute('data-tab'));
+  });
+  
+  // خرید
+  $('btnCapturePurchase').onclick = () => captureWeight('purchase');
+  $('btnSavePurchase').onclick = () => saveRecord('purchase');
+  $('btnResetPurchase').onclick = resetPurchase;
+  $('p_wastePercent').oninput = calcPurchase;
+  
+  // معمولی
+  $('btnCaptureNormal').onclick = () => captureWeight('normal');
+  $('btnSaveNormal').onclick = () => saveRecord('normal');
+  $('btnResetNormal').onclick = resetNormal;
+  $('n_pack').oninput = calcNormal;
+  
+  // گزارش‌ها
+  $('btnExcel').onclick = exportExcel;
+  $('btnClearRecords').onclick = () => {
+    if (confirm('حذف تمام قبض‌ها؟')) {
+      db.records = [];
+      saveDB();
+      renderRecords();
+      updateDashboard();
+      toast('✅ حذف شد');
+    }
+  };
+  
+  // داشبورد
+  $('btnDashToPurchase').onclick = () => switchTab('purchase');
+  $('btnDashRefresh').onclick = updateDashboard;
+  
+  // تنظیمات
+  $('btnSaveSettings').onclick = () => {
+    db.settings.name = $('set_name').value;
+    db.settings.theme = $('set_theme').value;
+    db.settings.pass = $('set_pass').value;
+    document.documentElement.setAttribute('data-theme', db.settings.theme);
+    saveDB();
+    toast('✅ تنظیمات ذخیره شد');
+  };
+  
+  $('btnBackup').onclick = () => {
+    const json = JSON.stringify(db, null, 2);
+    const a = document.createElement('a');
+    a.href = 'data:text/json,' + encodeURIComponent(json);
+    a.download = 'bascul-backup-' + nowDate() + '.json';
+    a.click();
+    toast('💾 پشتیبان دانلود شد');
+  };
+  
+  // ورود دستی وزن
+  $('btnManualWeight').onclick = () => {
+    const v = prompt('وزن (کیلوگرم):');
+    if (v !== null) {
+      liveWeight = roundInt(v);
+      $('liveWeight').textContent = liveWeight;
+      toast(`وزن: ${liveWeight} kg`);
+    }
+  };
+  
+  // میانبرها
+  document.addEventListener('keydown', e => {
+    if (e.key === 'F5') {
+      e.preventDefault();
+      if (document.querySelector('#purchase.active')) captureWeight('purchase');
+      else if (document.querySelector('#normal.active')) captureWeight('normal');
+    } else if (e.key === 'F6') {
+      e.preventDefault();
+      if (document.querySelector('#purchase.active')) saveRecord('purchase');
+      else if (document.querySelector('#normal.active')) saveRecord('normal');
+    } else if (e.key === 'F8') {
+      e.preventDefault();
+      if (document.querySelector('#purchase.active')) resetPurchase();
+      else if (document.querySelector('#normal.active')) resetNormal();
+    }
+  });
+}
+
+// شروع برنامه
+loadDB();
+document.documentElement.setAttribute('data-theme', db.settings.theme);
+bindEvents();
+resetPurchase();
+resetNormal();
+updateDashboard();
+
+// وزن شبیه‌ساز
+setInterval(() => {
+  liveWeight = Math.floor(Math.random() * 15000 + 500);
+  $('liveWeight').textContent = liveWeight;
+}, 3000);
+</script>
 </body>
 </html>
